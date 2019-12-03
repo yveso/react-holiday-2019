@@ -3,14 +3,16 @@ import ReactDOM from "react-dom";
 
 import "./styles.css";
 
-function Pokemon() {
-  return <h1>Bulbasaur</h1>;
+function Pokemon({ name }) {
+  return <h1>{name}</h1>;
 }
 
 function App() {
   return (
     <div>
-      <Pokemon />
+      <Pokemon name="Bisasam" />
+      <Pokemon name="Bisaknosp" />
+      <Pokemon name="Bisaflor" />
     </div>
   );
 }
