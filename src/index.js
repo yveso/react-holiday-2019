@@ -3,16 +3,16 @@ import ReactDOM from "react-dom";
 
 import "./styles.css";
 
-function Pokemon({ name }) {
-  return <h1>{name}</h1>;
+function Pokemon({ name, ...rest }) {
+  return <h1 {...rest}>{name}</h1>;
 }
 
 function App() {
   return (
     <div>
-      <Pokemon name="Bisasam" />
-      <Pokemon name="Bisaknosp" />
-      <Pokemon name="Bisaflor" />
+      <Pokemon name="Bisasam" class="Whut" />
+      <Pokemon name="Bisaknosp" id="23" />
+      <Pokemon name="Bisaflor" data-something="nice" />
     </div>
   );
 }
