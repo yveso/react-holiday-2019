@@ -15,13 +15,19 @@ function Pokemon({ name, ...rest }) {
 
 function App() {
   const [index, setIndex] = React.useState(0);
+  let pokemon = pokemons[index];
 
   return (
     <div>
       <button type="button" onClick={() => setIndex(index + 1)}>
         Next
       </button>
-      <Pokemon name={pokemons[index].name} />
+
+      {pokemon ? (
+        <Pokemon name={pokemons[index].name} />
+      ) : (
+        <div>No pokemon for index {index}</div>
+      )}
     </div>
   );
 }
