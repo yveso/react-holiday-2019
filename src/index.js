@@ -6,7 +6,9 @@ import "./styles.css";
 async function fetchPokemon(id = "") {
   let res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
   if (res.ok) {
-    return res.json();
+    const json = await res.json();
+    console.log(json);
+    return json;
   } else {
     return Promise.reject();
   }
@@ -17,7 +19,7 @@ function usePokemon(index) {
 
   React.useEffect(() => {
     fetchPokemon(index).then(json => setPokemon(json));
-  });
+  }, [index]);
 
   return pokemon;
 }
