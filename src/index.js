@@ -24,10 +24,10 @@ function Pokemon({ name, ...rest }) {
 
 function App() {
   const [index, setIndex] = React.useState(0);
-  let pokemon = pokemons[index];
+  const [pokemon, setPokemon] = React.useState(null);
 
   React.useEffect(() => {
-    fetchPokemon(index).then(json => console.log(json));
+    fetchPokemon(index).then(json => setPokemon(json));
   });
 
   return (
@@ -37,7 +37,7 @@ function App() {
       </button>
 
       {pokemon ? (
-        <Pokemon name={pokemons[index].name} />
+        <Pokemon name={pokemon.name} />
       ) : (
         <div>No pokemon for index {index}</div>
       )}
