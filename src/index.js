@@ -9,6 +9,15 @@ const pokemons = [
   { name: "Bisaflor" }
 ];
 
+async function fetchPokemon(id = "") {
+  let res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+  if (res.ok) {
+    return res.json();
+  } else {
+    return Promise.reject();
+  }
+}
+
 function Pokemon({ name, ...rest }) {
   return <h1 {...rest}>{name}</h1>;
 }
@@ -16,6 +25,10 @@ function Pokemon({ name, ...rest }) {
 function App() {
   const [index, setIndex] = React.useState(0);
   let pokemon = pokemons[index];
+
+  React.useEffect(() => {
+    fetchPokemon(index).then(json => console.log(json));
+  });
 
   return (
     <div>
