@@ -7,7 +7,7 @@ async function fetchPokemon(id = "") {
   let res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
   if (res.ok) {
     const json = await res.json();
-    console.log(json);
+    // console.log(json);
     return json;
   } else {
     return Promise.reject();
@@ -31,6 +31,7 @@ function Pokemon({ name, ...rest }) {
 function App() {
   const [index, setIndex] = React.useState(0);
   const pokemon = usePokemon(index);
+  const collection = usePokemon("");
 
   return (
     <div>
@@ -42,6 +43,16 @@ function App() {
         <Pokemon name={pokemon.name} />
       ) : (
         <div>No pokemon for index {index}</div>
+      )}
+
+      {collection ? (
+        <ul>
+          {collection.results.map(pokemon => (
+            <li key={pokemon.name}>{pokemon.name}</li>
+          ))}
+        </ul>
+      ) : (
+        <div>Fetching Pokemon</div>
       )}
     </div>
   );
