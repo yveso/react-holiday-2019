@@ -28,7 +28,7 @@ function Pokemon({ name, ...rest }) {
   return <h1 {...rest}>{name}</h1>;
 }
 
-function PokemonList({ as: As, items, ...rest }) {
+function PokemonList({ as: As = React.Fragment, items, ...rest }) {
   return (
     <As {...rest}>
       {items.map(pokemon => (
