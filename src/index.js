@@ -28,14 +28,13 @@ function Pokemon({ name, ...rest }) {
   return <h1 {...rest}>{name}</h1>;
 }
 
-function PokemonList({ as: As = React.Fragment, items, ...rest }) {
-  return (
-    <As {...rest}>
-      {items.map(pokemon => (
-        <li key={pokemon.name}>{pokemon.name}</li>
-      ))}
-    </As>
-  );
+function PokemonList({
+  as: As = React.Fragment,
+  items,
+  renderItem = pokemon => <li key={pokemon.key}>{pokemon.name}</li>,
+  ...rest
+}) {
+  return <As {...rest}>{items.map(renderItem)}</As>;
 }
 
 function App() {
@@ -56,7 +55,11 @@ function App() {
       )}
 
       {collection ? (
-        <PokemonList as="ol" items={collection.results} />
+        <PokemonList
+          as="div"
+          items={collection.results}
+          renderItem={pokemon => <button type="button">{pokemon.name}</button>}
+        />
       ) : (
         <div>Fetching Pokemon</div>
       )}
