@@ -28,13 +28,20 @@ function Pokemon({ name, ...rest }) {
   return <h1 {...rest}>{name}</h1>;
 }
 
-function PokemonList({
+function List({
   as: As = React.Fragment,
   items,
-  renderItem = pokemon => <li key={pokemon.key}>{pokemon.name}</li>,
+  renderItem = item => <p>{item.name}</p>,
   ...rest
 }) {
   return <As {...rest}>{items.map(renderItem)}</As>;
+}
+
+function PokemonList({
+  renderItem = pokemon => <li key={pokemon.key}>{pokemon.name}</li>,
+  ...props
+}) {
+  return <List {...props} renderItem={renderItem} />;
 }
 
 function App() {
