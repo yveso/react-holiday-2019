@@ -39,9 +39,16 @@ function List({
 
 function PokemonList({
   renderItem = pokemon => <li key={pokemon.key}>{pokemon.name}</li>,
+  className,
   ...props
 }) {
-  return <List {...props} renderItem={renderItem} />;
+  return (
+    <List
+      className={["PokemonList", className].join(" ")}
+      {...props}
+      renderItem={renderItem}
+    />
+  );
 }
 
 function App() {
@@ -64,6 +71,7 @@ function App() {
       {collection ? (
         <PokemonList
           as="div"
+          className="some-other"
           items={collection.results}
           renderItem={pokemon => <button type="button">{pokemon.name}</button>}
         />

@@ -1,4 +1,11 @@
-.App {
+body {
   font-family: sans-serif;
-  text-align: center;
+}
+
+.PokemonList {
+  border: 1px royalblue solid;
+}
+
+.some-other {
+  background: gold;
 }
