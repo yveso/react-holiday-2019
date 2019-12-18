@@ -62,10 +62,10 @@ function PokemonList({
 }
 
 function App() {
-  const [pokemon, setPokemon] = React.useReducer(
-    (oldState, newState) => newState,
-    null
-  );
+  const [pokemon, dispatch] = React.useReducer((state, action) => {
+    if (action.type === "replace_pokemon") return action.payload;
+    throw new Error();
+  }, null);
   const collection = usePokemon("");
 
   return (
@@ -81,7 +81,12 @@ function App() {
               <button
                 type="button"
                 onClick={() =>
-                  getJson(pokemon.url).then(json => setPokemon(json))
+                  getJson(pokemon.url).then(json =>
+                    dispatch({
+                      type: "replace_pokemon",
+                      payload: json
+                    })
+                  )
                 }
               >
                 {pokemon.name}
