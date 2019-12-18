@@ -25,10 +25,7 @@ async function getJson(url) {
 }
 
 function usePokemon(index) {
-  const [pokemon, setPokemon] = React.useReducer(
-    (oldState, newState) => newState,
-    null
-  );
+  const [pokemon, setPokemon] = React.useState(null);
 
   React.useEffect(() => {
     fetchPokemon(index).then(json => setPokemon(json));
@@ -65,7 +62,10 @@ function PokemonList({
 }
 
 function App() {
-  const [pokemon, setPokemon] = React.useState(null);
+  const [pokemon, setPokemon] = React.useReducer(
+    (oldState, newState) => newState,
+    null
+  );
   const collection = usePokemon("");
 
   return (
