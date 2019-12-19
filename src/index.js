@@ -62,10 +62,14 @@ function PokemonList({
 }
 
 function App() {
-  const [pokemon, dispatch] = React.useReducer((state, action) => {
-    if (action.type === "replace_pokemon") return action.payload;
-    throw new Error();
-  }, null);
+  const [{ pokemon, ...state }, dispatch] = React.useReducer(
+    (state, action) => {
+      if (action.type === "replace_pokemon")
+        return { ...state, pokemon: action.payload };
+      throw new Error();
+    },
+    { pokemon: null }
+  );
   const collection = usePokemon("");
 
   return (
