@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 
 import "./styles.css";
 
+let PokemonContext = React.createContext({ name: "pikachu" });
+
 async function fetchPokemon(id = "") {
   let res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
   if (res.ok) {
@@ -34,7 +36,8 @@ function usePokemon(index) {
   return pokemon;
 }
 
-function Pokemon({ name, ...rest }) {
+function Pokemon({ ...rest }) {
+  let { name } = React.useContext(PokemonContext);
   return <h1 {...rest}>{name}</h1>;
 }
 
@@ -83,7 +86,7 @@ function App() {
 
   return (
     <div>
-      {pokemon ? <Pokemon name={pokemon.name} /> : <div>Select Pokemon</div>}
+      {pokemon ? <Pokemon /> : <div>Select Pokemon</div>}
 
       {collection ? (
         <PokemonList
