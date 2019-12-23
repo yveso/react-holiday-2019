@@ -86,7 +86,13 @@ function App() {
 
   return (
     <div>
-      {pokemon ? <Pokemon /> : <div>Select Pokemon</div>}
+      {pokemon ? (
+        <PokemonContext.Provider value={pokemon}>
+          <Pokemon />
+        </PokemonContext.Provider>
+      ) : (
+        <div>Select Pokemon</div>
+      )}
 
       {collection ? (
         <PokemonList
