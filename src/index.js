@@ -37,7 +37,12 @@ function usePokemon(index) {
 }
 
 function Pokemon({ ...rest }) {
-  let { name } = React.useContext(PokemonContext);
+  let [
+    {
+      pokemon: { name }
+    },
+    dispatch
+  ] = React.useContext(PokemonContext);
   return <h1 {...rest}>{name}</h1>;
 }
 
@@ -65,7 +70,7 @@ function PokemonList({
 }
 
 function App() {
-  const [{ pokemon, ...state }, dispatch] = React.useReducer(
+  const stateReducer = React.useReducer(
     (state, action) => {
       if (action.type === "fetch_and_replace_pokemon") {
         getJson(action.payload).then(json =>
@@ -82,12 +87,13 @@ function App() {
     },
     { pokemon: null }
   );
+  const [{ pokemon }, dispatch] = stateReducer;
   const collection = usePokemon("");
 
   return (
     <div>
       {pokemon ? (
-        <PokemonContext.Provider value={pokemon}>
+        <PokemonContext.Provider value={stateReducer}>
           <Pokemon />
         </PokemonContext.Provider>
       ) : (
